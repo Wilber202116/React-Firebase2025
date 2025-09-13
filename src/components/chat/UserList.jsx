@@ -43,7 +43,7 @@ function UserList({onlineUsers, onLogout, darkMode}){
                 {/* Modal */}
                 {selectedUser && (
                     <div className="absolute -left-0 fixed inset-0 bg-opacity-50 flex items-center justify-center z-50">
-                        <div className={` bg-white rounded-lg shadow-lg p-6 w-60`}>
+                        <div className={` ${darkMode ? "bg-gray-600 text-white " : "bg-gray-400 text-black"} rounded-lg shadow-lg p-6 w-60`}>
                             <div className="flex justify-center items-center border-b pb-2 mb-2">
                                 <h3 className="text-lg font-bold"> Perfil de {selectedUser.name} </h3>
                                 <button className="text-gray-800 hover:text-gray-700 cursor-pointer ml-2" 
