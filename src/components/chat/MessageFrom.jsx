@@ -18,7 +18,7 @@ function MessageForm({ text, setText, onSend, darkMode}){
                 </button>
 
                 <span className={`absolute -top-7 -left-1/10 px-3 opacity-0 group-hover:opacity-100 pointer-events-none
-                    ${darkMode ? "bg-gray-600 text-white" : "bg-gray-300 text-black"}`}>Enviar</span>
+                    ${darkMode ? "bg-gray-600 text-white" : "bg-gray-300 text-black"} z-50`}>Enviar</span>
             </div>
             
 

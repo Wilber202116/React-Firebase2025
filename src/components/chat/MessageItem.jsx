@@ -9,10 +9,14 @@ function MessageItem({ msg, user, darkMode }){
     }
 
     const isMyMessage = msg.uid === user.uid;
+    console.log(`este es el mensaje: ${msg.uid}`);
+    console.log(user);
+    
+    console.log(isMyMessage)
 
     return(
         <div key={msg.id}
-        className={`mb-3 flex ${isMyMessage ? "justify-end" : "justify-start"}
+        className={`mb-3 flex ${isMyMessage ? "justify-start" : "justify-end"}
         ${darkMode ? "bg-gray-700" : "bg-gray-200 text-black"}`}>
             <div 
             className={`max-w-sx px-3 shadow-lg z-10 text-sm 

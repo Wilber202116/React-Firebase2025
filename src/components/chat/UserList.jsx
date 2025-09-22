@@ -14,7 +14,7 @@ function UserList({onlineUsers, onLogout, darkMode}){
 
     return(
         <>
-            <aside className={`w-56 p-4 mt-3 overflow-y-auto 
+            <aside className={`w-64 p-4 mt-3 overflow-y-auto 
                 ${darkMode ? "bg-gray-800 text-white " : "bg-gray-300 text-black"}`}>
                 <div className="flex justyfy-between items-center mb-4">
                     <h2 className="text-xl font-bold">Usuarios conectados</h2>
@@ -43,7 +43,7 @@ function UserList({onlineUsers, onLogout, darkMode}){
                 {/* Modal */}
                 {selectedUser && (
                     <div className="absolute -left-0 fixed inset-0 bg-opacity-50 flex items-center justify-center z-50">
-                        <div className={` ${darkMode ? "bg-gray-600 text-white " : "bg-gray-400 text-black"} rounded-lg shadow-lg p-6 w-60`}>
+                        <div className={` ${darkMode ? "bg-gray-600 text-white " : "bg-gray-200 text-black"} rounded-lg shadow-lg p-6 w-60`}>
                             <div className="flex justify-center items-center border-b pb-2 mb-2">
                                 <h3 className="text-lg font-bold"> Perfil de {selectedUser.name} </h3>
                                 <button className="text-gray-800 hover:text-gray-700 cursor-pointer ml-2" 

@@ -16,8 +16,24 @@ function Chat(){
     const [ messages, setMessages ] = useState([]);
     const [ text, setText ] = useState('');
     const [ showSideBar, setShowSideBar] = useState(true);
-    const [darkMode, setDarkMode] = useState(false);
+    const [darkMode, setDarkMode] = useState(() => {
+        const defaultTheme = localStorage.getItem("defaultTheme");
+        return defaultTheme ? JSON.parse(defaultTheme) : false;
+    });
     const chatEndRef = useRef(null);
+
+    useEffect(() => {
+        const defaultTheme = localStorage.getItem("defaultTheme");
+
+        if(defaultTheme !== null){
+            setDarkMode(JSON.parse(defaultTheme));
+        }
+        
+    },[])
+
+    useEffect(() => {
+        localStorage.setItem("defaultTheme", JSON.stringify(darkMode));
+    }, [darkMode]);
 
     const handledLogout = async () => {
         await logout();
@@ -72,10 +88,14 @@ function Chat(){
         return () => unsubscribe();
     },[])
 
+    useEffect(() => {
+        scrollToBottom();
+    },[])
+
     return(
         
         <>
-            <div className={`flex h-screen relative overflow-hidden transition-colors duration-300
+            <div className={`flex w-screen h-screen relative overflow-hidden transition-colors duration-300
                 ${darkMode ? "bg-gray-900 text-white" : "bg-gray-200 text-black"}`}>
                 {/* Boton toggie */}
 
@@ -88,13 +108,13 @@ function Chat(){
                     bg-gray-500">{showSideBar ? "Ocultar": "Mostrar"}</span>
                 </div>
                 
-                <div className="w-0 h-0 absolute top-126 -right-258 z-20 relative group">
+                <div className="top-149 -right-239 z-20 relative group">
                     <button onClick={() => setDarkMode(!darkMode)}
-                        className="bg-gray-800 text-white p-2
+                        className="fixed top-110 right-7 bg-gray-800 text-white p-2
                         rounded-full shadow hover:bg-gray-700 cursor-pointer">
                             {darkMode ? <Sun size={20}/> : <Moon size={20}/> }
                     </button>
-                    <span className="absolute rounded text-sm -top-12 -left-1 px-1 opacity-0 group-hover:opacity-100 pointer-events-none
+                    <span className="absolute rounded text-sm -top-50 left-45 px-1 opacity-0 group-hover:opacity-100 pointer-events-none
                     bg-gray-500 text-center">{darkMode ? "Modo claro": "Modo oscuro"}</span>
                 </div>
 
@@ -102,7 +122,7 @@ function Chat(){
 
                 {/* Panel izquierdo de Usuarios online */}
                 <aside className={`fixed top-0 left-0 h-full w-64 p-4
-                    p-2 overflow-y-auto transform transition-transfrm duration-300 ease-in-out z-10
+                    p-2 overflow-y-auto transform transition-transfrm duration-300 ease-in-out 
                     ${showSideBar ? "translate-x-0" : "-translate-x-full"}
                     ${darkMode ? "bg-gray-800 text-white" : "bg-gray-300 text-black"}`}>
                     <UserList onlineUsers={onlineUsers} onLogout={handledLogout} darkMode={darkMode}/>
